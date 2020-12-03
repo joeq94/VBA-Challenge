@@ -1,0 +1,80 @@
+Sub stock_counter():
+    ' Set the variables
+    Dim lastRow As Long
+    Dim start As Long
+    Dim openingValue As Double
+    Dim closingValue As Double
+    Dim ticker As String
+    Dim totalVolume As Double
+    
+    ' Set the titles
+    Range("I1").Value = "Ticker"
+    Range("J1").Value = "Yearly Change"
+    ' Define Last row
+    lastRow = Cells(Rows.Count, "A").End(xlUp).Row
+    ' Cells(2,1) = A2
+    ' Cells(2,"A") = A2
+    
+    ' Define Variables
+      start = 2
+      nr = 0
+      totalVolume = 0
+       
+    ' for loop from A2 till the last row
+    For Row = 2 To lastRow:
+    
+    totalVolume = totalVolume + Cells(Row, 7).Value
+       
+    ' detect the change in ticker
+    If Cells(Row, 1).Value <> Cells(Row + 1, 1).Value Then
+    ' this if statement looks at the current row and the next row.
+    ' the if statement will only run if the next row is different to the current row.
+    
+    ' this will only be true once it reaches A262
+    ticker = Cells(start, 1).Value
+    ' ticker = value in cell A2
+    ' this is how you save the value
+    Range("I" & 2 + nr).Value = ticker
+    
+    ' saving the first row of change
+    
+    ' get that row
+    
+    ' get the ticker
+    
+    ' OPENING VALUE
+    
+    ' get the opening value
+    ' opening value starts in a2
+    openingValue = Cells(start, 3).Value
+    Range("J" & 2 + nr).Value = openingValue
+    
+        
+    ' get the closing value
+    closingValue = Cells(Row, 6).Value
+    ' closing value = to the value of the cell f262
+    
+    ' saving the closing value
+    Range("K" & 2 + nr).Value = closingValue
+    
+    
+    
+    ' Total Volume
+    ' it adds for every row
+    ' then takes a break when the next ticker changes
+    Range("L" & 2 + nr).Value = totalVolume
+    ' then starts adding again. -> it starts from 0
+    totalVolume = 0
+    
+    
+    
+    start = Row + 1
+    
+    nr = nr + 1
+    
+    End If
+    
+    
+    Next Row
+    
+End Sub
